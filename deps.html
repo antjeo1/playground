@@ -61,6 +61,7 @@
     <table id="dependenciesTable">
         <thead>
             <tr>
+                <th>YAML File</th>
                 <th>Name</th>
                 <th>Version</th>
             </tr>
@@ -72,19 +73,25 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <script>
-        async function loadYAML() {
-            const response = await fetch('deps.yaml');
+        async function loadYAML(fileName) {
+            const response = await fetch(`data/${fileName}`);
             const yamlText = await response.text();
             const data = jsyaml.load(yamlText);
-            populateTable(data.dependencies);
+            populateTable(data.dependencies, fileName);
         }
 
-        function populateTable(dependencies) {
+        async function loadAllYAML() {
+            const files = ['deps-offer-shopping.yaml', 'deps-shopping-cart.yaml'];
+            for (const file of files) {
+                await loadYAML(file);
+            }
+        }
+
+        function populateTable(dependencies, fileName) {
             const tableBody = document.querySelector('#dependenciesTable tbody');
-            tableBody.innerHTML = '';
             dependencies.forEach(dep => {
                 const row = document.createElement('tr');
-                row.innerHTML = `<td>${dep.name}</td><td>${dep.version}</td>`;
+                row.innerHTML = `<td>${fileName}</td><td>${dep.name}</td><td>${dep.version}</td>`;
                 tableBody.appendChild(row);
             });
         }
@@ -110,7 +117,7 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadYAML);
+        document.addEventListener('DOMContentLoaded', loadAllYAML);
     </script>
 </body>
 
