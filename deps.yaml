@@ -1,0 +1,25 @@
+dependencies:
+- name: quarkus-resteasy
+  version: 1.13.7.Final
+- name: quarkus-hibernate-orm
+  version: 1.13.7.Final
+- name: quarkus-jdbc-postgresql
+  version: 1.13.7.Final
+- name: quarkus-smallrye-openapi
+  version: 1.13.7.Final
+- name: quarkus-arc
+  version: 1.13.7.Final
+- name: quarkus-smallrye-health
+  version: 1.13.7.Final
+- name: quarkus-smallrye-metrics
+  version: 1.13.7.Final
+- name: quarkus-smallrye-reactive-messaging
+  version: 1.13.7.Final
+- name: quarkus-smallrye-reactive-messaging-kafka
+  version: 1.13.7.Final
+- name: quarkus-smallrye-reactive-messaging-amqp
+  version: 1.13.7.Final
+- name: quarkus-smallrye-reactive-messaging-http
+  version: 1.13.7.Final
+- name: quarkus-smallrye-reactive-messaging-redis
+  version: 1.13.7.Final

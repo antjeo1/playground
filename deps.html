@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Dependencies</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Library Dependencies</h1>
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for dependencies..">
+    <table id="dependenciesTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Version</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be populated here -->
+        </tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script>
+        async function loadYAML() {
+            const response = await fetch('deps.yaml');
+            const yamlText = await response.text();
+            const data = jsyaml.load(yamlText);
+            populateTable(data.dependencies);
+        }
+
+        function populateTable(dependencies) {
+            const tableBody = document.querySelector('#dependenciesTable tbody');
+            tableBody.innerHTML = '';
+            dependencies.forEach(dep => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${dep.name}</td><td>${dep.version}</td>`;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function searchTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('dependenciesTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName('td');
+                let match = false;
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        if (td[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                            match = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = match ? '' : 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadYAML);
+    </script>
+</body>
+
+</html>
