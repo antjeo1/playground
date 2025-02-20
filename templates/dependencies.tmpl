@@ -1,0 +1,7 @@
+{{ $pomXML := (sh "curl" "-s" "https://raw.githubusercontent.com/antjeo1/playground/main/example-project/pom.xml") }}
+{{ $pom := (sh "echo" $pomXML | sh "yq" "-oy" ".") }}
+{{ toJSON $pom }}
+
+
+
+
