@@ -1,3 +1,9 @@
-urls:
-- https://raw.githubusercontent.com/antjeo1/playground/main/example-project/pom.xml
-- https://raw.githubusercontent.com/antjeo1/playground/refs/heads/main/example2-project/pom.xml
+datasources:
+  pomlist:
+    url: pomlist.yaml
+
+plugins:
+  xml2yaml:
+    cmd: /Users/echeek/Projects/playgrounds/react-yaml/dephtml/convert.sh
+  yq:
+    cmd: yq -oy '.'

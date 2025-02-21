@@ -1,7 +1,22 @@
-{{ $pomXML := (sh "curl" "-s" "https://raw.githubusercontent.com/antjeo1/playground/main/example-project/pom.xml") }}
-{{ $pom := (sh "echo" $pomXML | sh "yq" "-oy" ".") }}
-{{ toJSON $pom }}
+{{- $pomPaths := (datasource "pomlist").poms }}
+{{- $libs := coll.Slice  }}
+{{- range $url := $pomPaths -}}
+    {{- $pom := include $url }}
+    {{- $deps := data.YAML (xml2yaml $pom) }}
+    {{- range $dep := $deps.project.dependencies.dependency }}
+        {{- $libName := (printf "%s.%s" $dep.groupId $dep.artifactId)}}
+        {{- $projectName := (printf "%s.%s" $deps.project.groupId $deps.project.artifactId) }}
+        {{- $version := $dep.version }}
+        {{- $libs = $libs | append (dict "project" $projectName "dependency" $libName "version" $version ) }}
+    {{- end }}
+{{- end }}
 
+{{- range $dependency := $libs | jq "unique_by(.dependency) | map({dependency})" }}
 
-
+| {{ $dependency.dependency }} ||
+| --- | --- |
+{{- range ($libs | jq (printf "map(select(.dependency == \"%s\"))" $dependency.dependency)) }}
+|{{- .project}} | {{ .version}} |
+{{- end }}
+{{- end }}
 
