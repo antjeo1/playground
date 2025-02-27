@@ -16,7 +16,7 @@
 {{- range $dependency := $libs | jq "unique_by(.dependency) | map({dependency})" }}
 
 ## {{ $dependency.dependency }}
-| component using {{ $dependency.dependency }} | version referenced |
+| component | version referenced |
 | --- | --- |
 {{- range ($libs | jq (printf "map(select(.dependency == \"%s\"))" $dependency.dependency)) }}
 |{{- .project}} | {{ .version}} |

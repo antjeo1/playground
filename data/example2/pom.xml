@@ -10,7 +10,7 @@
     <dependencies>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>offer-shopping</artifactId>
+            <artifactId>offers</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
