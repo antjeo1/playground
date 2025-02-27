@@ -2,6 +2,12 @@ datasources:
   pomlist:
     url: pomlist.yaml
 
+inputFiles:
+- templates/dependencies.tmpl
+
+outputFiles:
+- doc/dependencies.md
+
 plugins:
   xml2yaml:
     cmd: /Users/echeek/Projects/playgrounds/react-yaml/dephtml/convert.sh

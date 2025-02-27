@@ -1,3 +1,9 @@
 poms:
 - https://raw.githubusercontent.com/antjeo1/playground/main/example-project/pom.xml
 - https://raw.githubusercontent.com/antjeo1/playground/refs/heads/main/example2-project/pom.xml
+- https://raw.githubusercontent.com/antjeo1/playground/refs/heads/main/data/example1/pom.xml
+- https://raw.githubusercontent.com/antjeo1/playground/refs/heads/main/data/example2/pom.xml
+- https://raw.githubusercontent.com/antjeo1/playground/refs/heads/main/data/example3/pom.xml
+- https://raw.githubusercontent.com/antjeo1/playground/refs/heads/main/data/example4/pom.xml
+- https://raw.githubusercontent.com/antjeo1/playground/refs/heads/main/data/example5/pom.xml
+- https://raw.githubusercontent.com/antjeo1/playground/refs/heads/main/data/example6/pom.xml
